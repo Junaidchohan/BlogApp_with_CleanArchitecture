@@ -11,47 +11,67 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  final emailController = TextEditingController();
+  final nameController = TextEditingController();
+  final passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    nameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Sign Up.",
-              style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 20),
-            AuthFeild(hintText: "Name"),
-            SizedBox(height: 15),
-
-            AuthFeild(hintText: "Email"),
-
-            SizedBox(height: 15),
-
-            AuthFeild(hintText: "Password"),
-            SizedBox(height: 20),
-
-            AuthGradientButton(),
-            SizedBox(height: 20),
-            RichText(
-              text: TextSpan(
-                text: "Don't have an account? ",
-                style: Theme.of(context).textTheme.titleMedium,
-                children: [
-                  TextSpan(
-                    text: "Sign In",
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: AppPallete.gradient2,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Sign Up.",
+                style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
               ),
-            ),
-          ],
+              SizedBox(height: 20),
+              AuthFeild(hintText: "Name", controller: nameController),
+              SizedBox(height: 15),
+
+              AuthFeild(hintText: "Email", controller: emailController),
+
+              SizedBox(height: 15),
+
+              AuthFeild(
+                hintText: "Password",
+                controller: passwordController,
+                isObscureText: true,
+              ),
+              SizedBox(height: 20),
+
+              AuthGradientButton(),
+              SizedBox(height: 20),
+              RichText(
+                text: TextSpan(
+                  text: "Don't have an account? ",
+                  style: Theme.of(context).textTheme.titleMedium,
+                  children: [
+                    TextSpan(
+                      text: "Sign In",
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: AppPallete.gradient2,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
