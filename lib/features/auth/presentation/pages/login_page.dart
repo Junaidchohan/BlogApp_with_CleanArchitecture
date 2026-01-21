@@ -53,7 +53,20 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: 20),
 
-              AuthGradientButton(buttonText: "Sign In"),
+              AuthGradientButton(
+                buttonText: "Sign In",
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    final email = emailController.text.trim();
+                    final password = passwordController.text.trim();
+
+                    debugPrint("Email: $email");
+                    debugPrint("Password: $password");
+
+                    // TODO: call AuthService.login(email, password)
+                  }
+                },
+              ),
               SizedBox(height: 20),
               GestureDetector(
                 onTap: () {
